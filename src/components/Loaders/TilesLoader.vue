@@ -1,0 +1,126 @@
+<template>
+  <div class="loading">
+    <div class="square"></div>
+    <div class="square"></div>
+    <div class="square"></div>
+    <div class="square"></div>
+    <div class="square"></div>
+    <div class="square"></div>
+    <div class="square"></div>
+  </div>
+</template>
+
+<style lang="scss" scoped>
+$square: 37px;
+$duration: 13s;
+
+@keyframes square-animation {
+  0% {
+    left: 0;
+    top: 0;
+  }
+  10.5% {
+    left: 0;
+    top: 0;
+  }
+  12.5% {
+    left: $square;
+    top: 0;
+  }
+  23% {
+    left: $square;
+    top: 0;
+  }
+  25% {
+    left: $square * 2;
+    top: 0;
+  }
+  35.5% {
+    left: $square * 2;
+    top: 0;
+  }
+  37.5% {
+    left: $square * 2;
+    top: $square;
+  }
+  48% {
+    left: $square * 2;
+    top: $square;
+  }
+  50% {
+    left: $square;
+    top: $square;
+  }
+  60.5% {
+    left: $square;
+    top: $square;
+  }
+  62.5% {
+    left: $square;
+    top: $square * 2;
+  }
+  73% {
+    left: $square;
+    top: $square * 2;
+  }
+  75% {
+    left: 0;
+    top: $square * 2;
+  }
+  85.5% {
+    left: 0;
+    top: $square * 2;
+  }
+  87.5% {
+    left: 0;
+    top: $square;
+  }
+  98% {
+    left: 0;
+    top: $square;
+  }
+  100% {
+    left: 0;
+    top: 0;
+  }
+}
+
+@keyframes hue-rotate {
+  0% {
+    filter: hue-rotate(0deg);
+  }
+  100% {
+    filter: hue-rotate(360deg);
+  }
+}
+
+.loading {
+  position: relative;
+  width: $square * 3;
+  height: $square * 3;
+  transform: rotate(45deg);
+  animation: hue-rotate $duration linear infinite both;
+}
+
+.square {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: $square - 4px;
+  height: $square - 4px;
+  margin: 2px;
+  border-radius: 2px;
+  background: #07a;
+  background-image: linear-gradient(45deg, #fa0 40%, #0c9 60%);
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  animation: square-animation $duration ease-in-out infinite both;
+
+  @for $i from 0 through 7 {
+    &:nth-of-type(#{$i}) {
+      animation-delay: #{- calc($duration / 7) * $i};
+    }
+  }
+}
+</style>
