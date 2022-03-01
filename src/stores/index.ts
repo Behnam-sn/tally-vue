@@ -26,6 +26,26 @@ interface Review {
   modifiedPatients: ModifiedPatient[];
 }
 
+interface Test {
+  id: number;
+  name: string;
+  therapist: string;
+  date: string;
+  totallyAgreeTotal: number;
+  agreeTotal: number;
+  noOpinionTotal: number;
+  disAgreeTotal: number;
+  totallyDisAgreeTotal: number;
+  validate: boolean;
+  answers: [];
+}
+
+interface StreamNeo {
+  tests: Test[];
+  currentIndex: number;
+  lastIndex: number;
+}
+
 interface State {
   maximizeStatus: string;
   connection?: any;
@@ -34,6 +54,7 @@ interface State {
   currentTab: string;
   message: Message;
   review: Review;
+  streamNeo: StreamNeo;
 }
 
 export const useIndexStore = defineStore({
@@ -61,10 +82,18 @@ export const useIndexStore = defineStore({
         },
         modifiedPatients: [],
       },
+      streamNeo: {
+        tests: [],
+        currentIndex: 0,
+        lastIndex: 0,
+      },
     } as State),
   getters: {
     patient(): Patient {
       return this.review.patients[this.review.currentPatient];
+    },
+    currentTest(): Test {
+      return this.streamNeo.tests[this.streamNeo.currentIndex];
     },
   },
   actions: {
@@ -84,8 +113,6 @@ export const useIndexStore = defineStore({
 
       this.connection.onmessage = (event: { data: string }) => {
         this.message = JSON.parse(event.data);
-
-        console.log(this.message);
 
         if (
           ["log", "review", "streamNeo"].includes(this.message.type) ||
