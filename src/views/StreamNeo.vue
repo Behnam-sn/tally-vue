@@ -30,14 +30,16 @@ watch(
 
 <template>
   <div id="stream-neo">
-    <template v-if="store.loadingState">
-      <TheLoader />
-    </template>
-    <template v-else>
-      <ControlBar />
-      <TheInformations />
-      <TheAnswers />
-    </template>
+    <transition name="app-fade" mode="out-in">
+      <template v-if="store.loadingState">
+        <TheLoader />
+      </template>
+      <div v-else>
+        <ControlBar />
+        <TheInformations />
+        <TheAnswers />
+      </div>
+    </transition>
   </div>
 </template>
 

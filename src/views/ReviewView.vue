@@ -9,6 +9,7 @@ import { useIndexStore } from "@/stores/index";
 const store = useIndexStore();
 
 onBeforeMount(() => {
+  store.resetReview();
   store.sendMessage({
     type: "command",
     message: "sendReview",
