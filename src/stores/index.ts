@@ -98,7 +98,7 @@ export const useIndexStore = defineStore({
   },
   actions: {
     startConnection() {
-      this.connection = new WebSocket("ws://localhost:6936/ws");
+      this.connection = new WebSocket("ws://localhost:6936/");
 
       this.connection.onopen = () => {
         this.connectionState = true;
