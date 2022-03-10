@@ -20,10 +20,10 @@ const tabs: any = { Home, Log, Review, StreamNeo };
   <div id="app">
     <TitleBar />
 
-    <transition name="app-fade" mode="out-in">
+    <transition name="fade" mode="out-in">
       <div v-if="store.connectionState" id="container">
         <MenuBar />
-        <transition name="app-fade" mode="out-in">
+        <transition name="fade" mode="out-in">
           <component :is="tabs[store.currentTab]"></component>
         </transition>
       </div>
@@ -42,25 +42,19 @@ const tabs: any = { Home, Log, Review, StreamNeo };
   flex-direction: column;
   overflow-x: hidden;
 
-  .app-fade-enter-active {
-    animation: appFade 0.35s ease-in-out;
-  }
-  .app-fade-leave-active {
-    animation: appFade 0.35s ease-in-out reverse;
-  }
-
-  @keyframes appFade {
-    0% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
-  }
-
   #container {
     display: flex;
     flex-direction: row;
   }
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.35s ease-in-out;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>

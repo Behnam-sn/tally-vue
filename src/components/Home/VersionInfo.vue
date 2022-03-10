@@ -21,9 +21,9 @@ function changeVisibility(value: boolean) {
       <transition name="version-fade">
         <div class="tooltiptext" v-show="visibility">
           <div>Tally : {{ appVersion }}</div>
-          <div>Vue : 2.6.14</div>
+          <div>Vue : 3.2.31</div>
           <div>Electron : {{ electronVersion }}</div>
-          <div>Python : 3.9.4</div>
+          <div>Python : 3.10.2</div>
         </div>
       </transition>
     </div>

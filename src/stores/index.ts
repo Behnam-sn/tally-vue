@@ -20,7 +20,7 @@ interface ModifiedPatient {
 
 interface Review {
   patients: Patient[];
-  currentPatient: number;
+  currentIndex: number;
   transitionName: string;
   selectedType: any;
   modifiedPatients: ModifiedPatient[];
@@ -72,7 +72,7 @@ export const useIndexStore = defineStore({
       },
       review: {
         patients: [],
-        currentPatient: 0,
+        currentIndex: 0,
         transitionName: "",
         selectedType: {
           "0": undefined,
@@ -89,8 +89,11 @@ export const useIndexStore = defineStore({
       },
     } as State),
   getters: {
-    patient(): Patient {
-      return this.review.patients[this.review.currentPatient];
+    currentPatient(): Patient {
+      return this.review.patients[this.review.currentIndex];
+    },
+    currentModifiedPatient(): ModifiedPatient {
+      return this.review.modifiedPatients[this.review.currentIndex];
     },
     currentTest(): Test {
       return this.streamNeo.tests[this.streamNeo.currentIndex];
@@ -134,7 +137,7 @@ export const useIndexStore = defineStore({
     resetReview() {
       this.review = {
         patients: [],
-        currentPatient: 0,
+        currentIndex: 0,
         transitionName: "",
         selectedType: {
           "0": undefined,

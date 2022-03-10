@@ -10,13 +10,10 @@ const lastPatient = computed(() => {
 
 function next() {
   store.review.transitionName = "slide-next";
-  store.review.currentPatient = store.review.currentPatient + 1;
+  store.review.currentIndex = store.review.currentIndex + 1;
 
-  if (
-    store.review.modifiedPatients[store.review.currentPatient] !== undefined
-  ) {
-    store.review.selectedType =
-      store.review.modifiedPatients[store.review.currentPatient].selectedType;
+  if (store.currentModifiedPatient !== undefined) {
+    store.review.selectedType = store.currentModifiedPatient.selectedType;
   } else {
     store.review.selectedType = {
       "0": undefined,
@@ -29,13 +26,10 @@ function next() {
 
 function previous() {
   store.review.transitionName = "slide-previous";
-  store.review.currentPatient = store.review.currentPatient - 1;
+  store.review.currentIndex = store.review.currentIndex - 1;
 
-  if (
-    store.review.modifiedPatients[store.review.currentPatient] !== undefined
-  ) {
-    store.review.selectedType =
-      store.review.modifiedPatients[store.review.currentPatient].selectedType;
+  if (store.currentModifiedPatient !== undefined) {
+    store.review.selectedType = store.currentModifiedPatient.selectedType;
   } else {
     store.review.selectedType = {
       "0": undefined,
@@ -64,17 +58,18 @@ function finish() {
   store.resetReview();
 }
 </script>
+
 <template>
   <div id="control-bar">
     <button
-      v-if="store.review.currentPatient != 0"
+      v-if="store.review.currentIndex != 0"
       id="btn-perv"
       @click="previous"
     >
       Previous
     </button>
     <button
-      v-if="store.review.currentPatient === lastPatient"
+      v-if="store.review.currentIndex === lastPatient"
       id="btn-fin"
       @click="finish"
     >

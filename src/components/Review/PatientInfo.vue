@@ -60,7 +60,7 @@ function selectType(index: number, value: string) {
 }
 
 function ModifiedPatient() {
-  let allTypes = store.patient.type;
+  let allTypes = store.currentPatient.type;
 
   for (const property in store.review.selectedType) {
     let key = parseInt(property);
@@ -71,8 +71,8 @@ function ModifiedPatient() {
     }
   }
 
-  store.review.modifiedPatients[store.review.currentPatient] = {
-    id: store.patient.id,
+  store.review.modifiedPatients[store.review.currentIndex] = {
+    id: store.currentPatient.id,
     type: allTypes,
     selectedType: store.review.selectedType,
   };
@@ -88,11 +88,13 @@ function replaceAt(str: string, index: number, replacement: string) {
 <template>
   <div class="patient-wrapper">
     <transition :name="store.review.transitionName">
-      <div class="patient" :key="store.patient.name">
-        <div class="patient-name">{{ store.patient.name }}</div>
-        <div class="patient-therapist">{{ store.patient.therapist }}</div>
+      <div class="patient" :key="store.currentPatient.name">
+        <div class="patient-name">{{ store.currentPatient.name }}</div>
+        <div class="patient-therapist">
+          {{ store.currentPatient.therapist }}
+        </div>
         <div class="patient-type">
-          <template v-for="(type, index) in store.patient.type">
+          <template v-for="(type, index) in store.currentPatient.type">
             <div v-if="type === '?'" :key="index + type" class="unknown">
               <template v-for="value in types[index]" :key="value">
                 <div

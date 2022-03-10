@@ -30,7 +30,7 @@ watch(
 
 <template>
   <div id="stream-neo">
-    <transition name="app-fade" mode="out-in">
+    <transition name="fade" mode="out-in">
       <template v-if="store.loadingState">
         <TheLoader />
       </template>
