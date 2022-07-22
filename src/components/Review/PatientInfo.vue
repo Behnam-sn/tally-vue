@@ -63,8 +63,8 @@ function ModifiedPatient() {
   let allTypes = store.currentPatient.type;
 
   for (const property in store.review.selectedType) {
-    let key = parseInt(property);
-    let value = store.review.selectedType[property];
+    const key = parseInt(property);
+    const value = store.review.selectedType[property];
 
     if (value !== undefined) {
       allTypes = replaceAt(allTypes, key, value);

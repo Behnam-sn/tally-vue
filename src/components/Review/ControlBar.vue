@@ -41,7 +41,7 @@ function previous() {
 }
 
 function finish() {
-  let list = store.review.modifiedPatients.filter((item) => {
+  const list = store.review.modifiedPatients.filter((item) => {
     return item.type.includes("?") === false;
   });
 

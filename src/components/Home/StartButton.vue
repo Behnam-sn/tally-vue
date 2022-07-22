@@ -30,7 +30,7 @@ watch(
   }
 );
 
-let root = document.querySelector(":root") as HTMLElement;
+const root = document.querySelector(":root") as HTMLElement;
 watch(
   () => buttonText.value,
   async (val: string) => {

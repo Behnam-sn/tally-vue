@@ -3,7 +3,7 @@ const { contextBridge, ipcRenderer } = require("electron");
 
 contextBridge.exposeInMainWorld("api", {
   send: (channel) => {
-    let validChannels = ["close", "minimize", "maximize", "restore"];
+    const validChannels = ["close", "minimize", "maximize", "restore"];
     if (validChannels.includes(channel)) {
       ipcRenderer.send(channel);
     }
@@ -15,7 +15,7 @@ contextBridge.exposeInMainWorld("api", {
     }
   },
   receive: (channel, func) => {
-    let validChannels = ["maximize-status"];
+    const validChannels = ["maximize-status"];
     if (validChannels.includes(channel)) {
       ipcRenderer.on(channel, (event, ...args) => func(...args));
     }

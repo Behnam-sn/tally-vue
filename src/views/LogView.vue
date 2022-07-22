@@ -12,7 +12,7 @@ onBeforeMount(() => {
 });
 
 onUpdated(() => {
-  var l = document.querySelector("#log") as HTMLElement;
+  const l = document.querySelector("#log") as HTMLElement;
   l.scrollTop = l.scrollHeight;
 });
 
